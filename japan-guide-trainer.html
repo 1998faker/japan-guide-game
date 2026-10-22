@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>日本旅游日语训练器 · 10大场景100题</title>
+<style>
+:root{
+  --bg:#f4f6f9; --card:#ffffff; --ink:#1f2937; --sub:#6b7280;
+  --line:#e5e7eb; --brand:#e11d48; --brand2:#be123c;
+  --ok:#059669; --bad:#dc2626; --soft:#fef2f2;
+  --shadow:0 6px 24px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{
+  margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;
+  padding-bottom:env(safe-area-inset-bottom,16px);
+}
+.wrap{max-width:760px;margin:0 auto;padding:16px;}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:18px;margin-bottom:14px;}
+h1{font-size:22px;margin:4px 0 2px;letter-spacing:.5px;}
+.sub{color:var(--sub);font-size:13px;margin:0 0 10px;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  border:none;border-radius:12px;padding:12px 16px;font-size:15px;font-weight:600;
+  cursor:pointer;transition:.15s;width:100%;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--brand);color:#fff;}
+.btn-primary:hover{background:var(--brand2);}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);}
+.btn-sm{padding:8px 12px;font-size:13px;width:auto;border-radius:10px;}
+.btn-warm{background:#f59e0b;color:#fff;}
+.row{display:flex;gap:10px;flex-wrap:wrap;}
+.row .btn{flex:1;min-width:140px;}
+.tag{display:inline-block;background:#f3f4f6;border-radius:999px;padding:3px 10px;font-size:12px;color:var(--sub);margin-right:6px;}
+.hero{
+  background:linear-gradient(135deg,#e11d48,#f97316);color:#fff;
+  border-radius:18px;padding:22px 20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.hero h1{font-size:24px;margin-bottom:6px;}
+.hero p{margin:0;opacity:.92;font-size:13.5px;}
+.hero .role-badge{display:inline-block;background:rgba(255,255,255,.22);border-radius:8px;padding:3px 10px;font-size:12px;margin-bottom:10px;}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mode-card{
+  border:2px solid var(--line);border-radius:16px;padding:16px;background:#fff;
+  cursor:pointer;text-align:left;transition:.15s;
+}
+.mode-card:hover{border-color:var(--brand);transform:translateY(-2px);}
+.mode-card .ico{font-size:30px;margin-bottom:6px;}
+.mode-card h3{margin:0 0 4px;font-size:16px;}
+.mode-card p{margin:0;font-size:12.5px;color:var(--sub);}
+.scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.sc-card{
+  border:1.5px solid var(--line);border-radius:14px;padding:12px;background:#fff;cursor:pointer;transition:.15s;text-align:left;
+}
+.sc-card:hover{border-color:var(--brand);background:#fff5f7;}
+.sc-card .sc-ico{font-size:24px;}
+.sc-card .sc-name{font-weight:700;font-size:14px;margin:2px 0;}
+.sc-card .sc-meta{font-size:11.5px;color:var(--sub);}
+.progress{height:8px;background:#f3f4f6;border-radius:999px;overflow:hidden;margin:10px 0 4px;}
+.progress > i{display:block;height:100%;background:linear-gradient(90deg,#e11d48,#f97316);width:0;transition:.3s;}
+.stats{display:flex;justify-content:space-around;text-align:center;margin:10px 0;}
+.stat-num{font-size:22px;font-weight:800;color:var(--brand);}
+.stat-lbl{font-size:11px;color:var(--sub);}
+.bubble{
+  background:#fff;border:1.5px solid var(--line);border-radius:16px 16px 16px 4px;
+  padding:14px 16px;margin-bottom:12px;position:relative;
+}
+.bubble .who{font-size:11.5px;color:var(--brand);font-weight:700;margin-bottom:6px;}
+.jp{font-size:22px;font-weight:700;line-height:1.6;letter-spacing:.5px;}
+.romaji{color:var(--sub);font-size:13px;margin-top:8px;font-style:italic;}
+.speak{
+  position:absolute;top:10px;right:10px;background:#fff;border:1.5px solid var(--line);
+  border-radius:50%;width:38px;height:38px;font-size:16px;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;
+}
+.speak:active{transform:scale(.9);}
+.opts{display:grid;gap:10px;}
+.opt{
+  text-align:left;border:2px solid var(--line);background:#fff;border-radius:14px;
+  padding:13px 14px;font-size:15px;cursor:pointer;transition:.15s;width:100%;
+}
+.opt:hover{border-color:#fda4af;}
+.opt.correct{border-color:var(--ok);background:#ecfdf5;}
+.opt.wrong{border-color:var(--bad);background:var(--soft);}
+.opt.disabled{opacity:.6;pointer-events:none;}
+.expl{background:#f8fafc;border-left:4px solid var(--brand);border-radius:10px;padding:12px 14px;margin-top:12px;font-size:13.5px;}
+.expl h4{margin:0 0 6px;font-size:13px;color:var(--brand);}
+.expl .natural{background:#fff;border-radius:8px;padding:8px 10px;margin:6px 0;font-size:14px;}
+.word{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 9px;margin:3px 4px 3px 0;font-size:12.5px;}
+.word b{color:var(--brand);}
+.hidden{display:none;}
+.center{text-align:center;}
+.mt{margin-top:12px;}
+.kana-hint{font-size:12px;color:var(--sub);margin-top:4px;}
+.feedback{font-size:14px;font-weight:700;margin:8px 0 0;}
+.feedback.ok{color:var(--ok);}
+.feedback.no{color:var(--bad);}
+.tip{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:12px 14px;font-size:13px;color:#92400e;margin-bottom:14px;}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+const SCENES = {"restaurant": {"icon": "🍜", "name": "餐厅点餐", "tip": "菜单、忌口、辣度、结账……朋友最依赖你的一关。", "qa": [{"jp": "このメニュー、日本語が読めないんですけど…おすすめはどれですか？", "romaji": "Kono menyuu, nihongo ga yomenain desu kedo… osusume wa dore desu ka?", "opts": ["我看不懂这个日语菜单……有什么推荐的吗？", "这个菜单上菜的价格是多少？", "这个菜单能拍照吗？", "请给我一份中文菜单"], "ans": 0, "natural": "不说「何が入ってるか教えてください」，而是先说「日本語が読めないんですけど」表明看不懂，再问「おすすめはどれ？」更自然。", "words": [["メニュー", "菜单"], ["読（よ）めない", "看不懂"], ["おすすめ", "推荐"]]}, {"jp": "すみません、これって辛（から）いやつですか？", "romaji": "Sumimasen, kore tte karai yatsu desu ka?", "opts": ["不好意思，这个是辣的吗？", "不好意思，这个是多少钱？", "不好意思，这个能打包吗？", "不好意思，这个卖完了吗？"], "ans": 0, "natural": "「〜って」是口语化的「是……吗」，「やつ」指那个东西，比「料理」更口语、更像游客会问的。", "words": [["辛（から）い", "辣"], ["やつ", "那个（口语）"]]}, {"jp": "卵（たまご）が入ってない料理はあります？", "romaji": "Tamago ga haittenai ryouri wa arimasu?", "opts": ["有不含鸡蛋的菜吗？", "有含鸡蛋的菜吗？", "鸡蛋是另外收费的吗？", "这鸡蛋是生的吗？"], "ans": 0, "natural": "注意是「卵が入ってない（不含鸡蛋）」，过敏或忌口时常用。也可以说「卵抜きにできますか？」(能不放鸡蛋吗)。", "words": [["入（はい）ってる", "包含"], ["入（はい）ってない", "不包含"]]}, {"jp": "これ、辛（から）くない方（ほう）がいいんですけど…", "romaji": "Kore, karakunai hou ga ii n desu kedo…", "opts": ["这个我想要不辣的那种……", "这个我想要更辣一点……", "这个我想分两次上……", "这个我想打包带走……"], "ans": 0, "natural": "「〜ない方がいい」= 最好是不要……「んですけど」留白，把话交给对方，是日本人点餐时的典型表达。", "words": [["〜ない方（ほう）がいい", "最好是不要……"]]}, {"jp": "写真（しゃしん）の料理、まだありますか？", "romaji": "Shashin no ryouri, mada arimasu ka?", "opts": ["照片上的这道菜还有吗？", "能给我看更多照片吗？", "能拍这道菜的照片吗？", "照片里的菜是什么？"], "ans": 0, "natural": "指着墙上或图册的照片点菜是常见场景。「まだありますか」= 还有吗（卖完没）。", "words": [["写真（しゃしん）", "照片"], ["まだ", "还、仍然"]]}, {"jp": "すみません、お冷（ひや）みずを1杯（いっぱい）いただけますか？", "romaji": "Sumimasen, o-hiyamizu o ippai itadakemasu ka?", "opts": ["不好意思，能给我一杯冰水吗？", "不好意思，水要另外收费吗？", "不好意思，有没有热水？", "不好意思，杯子能多拿几个吗？"], "ans": 0, "natural": "「お冷（ひや）みず」是日料店常见的冰水。「〜いただけますか」是「〜てもらえますか」的更礼貌说法。", "words": [["お冷（ひや）みず", "冰水"], ["いただけますか", "能请您……吗"]]}, {"jp": "これ、別（べつ）々（べつ）に払（はら）えますか？", "romaji": "Kore, betsubetsu ni haraemasu ka?", "opts": ["这个能分开付钱吗？", "这个能刷卡吗？", "这个能开发票吗？", "这个能先付定金吗？"], "ans": 0, "natural": "「別々（べつべつ）に払う」= 各付各的、AA制。「〜えますか」是可能形的询问。", "words": [["別々（べつべつ）", "分别、各自"], ["払（はら）う", "付钱"]]}, {"jp": "お会計（かいけい）お願（ねが）いします。", "romaji": "O-kaikei onegai shimasu.", "opts": ["麻烦买单。", "麻烦再点一道菜。", "麻烦打包。", "麻烦开发票。"], "ans": 0, "natural": "「お会計」是结账。这是日本人最标准的叫服务员结账的说法，简短不说废话。", "words": [["お会計（かいけい）", "结账、买单"]]}, {"jp": "これ、持（も）ち帰（かえ）りにできますか？", "romaji": "Kore, mochikaeri ni dekimasu ka?", "opts": ["这个能打包带走吗？", "这个能在这吃吗？", "这个能加热吗？", "这个能留到明天吗？"], "ans": 0, "natural": "「持ち帰り」= 打包带走、外带。便利店说「ここで食べます」(在这吃) / 「持ち帰ります」(带走)。", "words": [["持（も）ち帰（かえ）り", "外带、打包"]]}, {"jp": "すみません、フォークとスプーン、あります？", "romaji": "Sumimasen, fooku to supuun, arimasu?", "opts": ["不好意思，有叉子和勺子吗？", "不好意思，有儿童座椅吗？", "不好意思，有湿纸巾吗？", "不好意思，有吸烟区吗？"], "ans": 0, "natural": "直接用外来语「フォーク」「スプーン」比汉字更自然。句尾「あります？」升调省略，是口语典型。", "words": [["フォーク", "叉子"], ["スプーン", "勺子"]]}]}, "train": {"icon": "🚃", "name": "电车出行", "tip": "看线路、问末班、买票……带路全靠你。", "qa": [{"jp": "すみません、新宿（しんじゅく）にはどの電車（でんしゃ）で行（い）けばいいですか？", "romaji": "Shinjuku ni wa dono densha de ikeba ii desu ka?", "opts": ["不好意思，去新宿该坐哪趟电车？", "不好意思，新宿站怎么走？", "不好意思，新宿是几号出口？", "不好意思，去新宿要多久？"], "ans": 0, "natural": "「〜で行けばいいですか」= 坐什么去比较好？比「どの電車ですか」更准确传达该坐哪趟。", "words": [["電車（でんしゃ）", "电车"], ["行（い）けば", "去的话"]]}, {"jp": "終電（しゅうでん）って、何時（なんじ）ですか？", "romaji": "Shuuden tte, nanji desu ka?", "opts": ["末班车是几点？", "首班车是几点？", "现在几点了？", "还有几趟车？"], "ans": 0, "natural": "「終電（しゅうでん）」= 末班车。「〜って」口语提示主题，说到这个的话。", "words": [["終電（しゅうでん）", "末班车"], ["何時（なんじ）", "几点"]]}, {"jp": "この切符（きっぷ）、そのまま使（つか）えますか？", "romaji": "Kono kippu, sono mama tsukaemasu ka?", "opts": ["这张票能直接用吗？", "这张票能退吗？", "这张票能改日期吗？", "这张票能多人用吗？"], "ans": 0, "natural": "「そのまま使える」= 照原样能用。「〜えますか」确认可用性。", "words": [["切符（きっぷ）", "票"], ["そのまま", "照原样"]]}, {"jp": "すみません、この席（せき）、座（すわ）ってもいいですか？", "romaji": "Sumimasen, kono seki, suwatte mo ii desu ka?", "opts": ["不好意思，这个座位能坐吗？", "不好意思，这个座位能调吗？", "不好意思，这个座位有人吗？", "不好意思，这个座位能放行李吗？"], "ans": 0, "natural": "「〜てもいいですか」= 可以做……吗。礼貌地请求许可，万能句型。", "words": [["席（せき）", "座位"], ["座（すわ）る", "坐"]]}, {"jp": "ICカードって、どこで買（か）えますか？", "romaji": "IC kaado tte, doko de kaemasu ka?", "opts": ["IC卡在哪里能买到？", "IC卡在哪里能充值？", "IC卡在哪里能用？", "IC卡在哪里能退？"], "ans": 0, "natural": "「ICカード」= Suica/Pasmo等交通卡。「どこで買えますか」= 在哪买。", "words": [["ICカード", "交通卡"], ["買（か）う", "买"]]}, {"jp": "あの、次（つぎ）はどこで降（お）りるんですか？", "romaji": "Ano, tsugi wa doko de oriru n desu ka?", "opts": ["那个……接下来在哪站下车？", "那个……接下来换乘几号车？", "那个……接下来要坐多久？", "那个……接下来要去哪个站台？"], "ans": 0, "natural": "「あの」= 呃、那个（开口铺垫）。「降りる」= 下车。「〜んですか」询问细节。", "words": [["次（つぎ）", "下一个"], ["降（お）りる", "下车"]]}, {"jp": "すみません、出口（でぐち）はどっちですか？", "romaji": "Sumimasen, deguchi wa docchi desu ka?", "opts": ["不好意思，出口是哪边？", "不好意思，入口在哪？", "不好意思，电梯在哪？", "不好意思，检票口在哪？"], "ans": 0, "natural": "「どっち」= 哪边，比「どちら」更口语，站内问路常用。", "words": [["出口（でぐち）", "出口"], ["どっち", "哪边"]]}, {"jp": "これ、東京（とうきょう）まで使（つか）えますか？", "romaji": "Kore, Toukyou made tsukaemasu ka?", "opts": ["这个（票/卡）能用到东京吗？", "这个能到东京吗？", "这个到东京要多久？", "这个到东京要多少钱？"], "ans": 0, "natural": "「〜まで」= 到……为止。「使える」= 能用，问票的有效范围。", "words": [["まで", "到……为止"], ["使（つか）える", "能用"]]}, {"jp": "あの、券売機（けんばいき）ってどこですか？", "romaji": "Ano, kenbaiki tte doko desu ka?", "opts": ["那个……售票机在哪里？", "那个……自动扶梯在哪？", "那个……服务台在哪？", "那个……存包柜在哪？"], "ans": 0, "natural": "「券売機（けんばいき）」= 售票机。「〜ってどこですか」= ……在哪。", "words": [["券売機（けんばいき）", "售票机"], ["どこ", "哪里"]]}, {"jp": "すみません、遅（おく）れてすみません…", "romaji": "Sumimasen, okurete sumimasen…", "opts": ["不好意思，迟到了，抱歉……", "不好意思，走错路了……", "不好意思，坐过站了……", "不好意思，赶不上了……"], "ans": 0, "natural": "「遅れる」= 迟到。「〜てすみません」= 做了……抱歉。赶不上电车时的经典台词。", "words": [["遅（おく）れる", "迟到"], ["すみません", "抱歉"]]}]}, "shopping": {"icon": "🛍️", "name": "购物买东西", "tip": "试穿、尺寸、免税……陪朋友扫货必备。", "qa": [{"jp": "すみません、これ、試着（しちゃく）できますか？", "romaji": "Sumimasen, kore, shichaku dekimasu ka?", "opts": ["不好意思，这个能试穿吗？", "不好意思，这个能退货吗？", "不好意思，这个能打折吗？", "不好意思，这个能预定吗？"], "ans": 0, "natural": "「試着（しちゃく）」= 试穿。服装店高频词，「〜できますか」= 能……吗。", "words": [["試着（しちゃく）", "试穿"], ["できますか", "能……吗"]]}, {"jp": "あの、免税（めんぜい）の手続（てつづ）きはどこでするんですか？", "romaji": "Ano, menzei no tetsudzuki wa doko de suru n desu ka?", "opts": ["那个……免税手续是在哪办的？", "那个……免税要满足多少金额？", "那个……免税要出示护照吗？", "那个……免税能退现金吗？"], "ans": 0, "natural": "「免税（めんぜい）」= 免税。「手続き」= 手续。「〜んですか」询问具体做法。", "words": [["免税（めんぜい）", "免税"], ["手続（てつづ）き", "手续"]]}, {"jp": "これ、サイズ違（ちが）うのあります？", "romaji": "Kore, saizu chigau no arimasu?", "opts": ["这个有其他尺寸的吗？", "这个有其他颜色的吗？", "这个有大一号的吗？", "这个有小一号的吗？"], "ans": 0, "natural": "「サイズ違うの」= 尺寸不同的。句尾省略「がありますか」，口语精简。", "words": [["サイズ", "尺寸"], ["違（ちが）う", "不同"]]}, {"jp": "あの、会計（かいけい）お願（ねが）いします。", "romaji": "Ano, kaikei onegai shimasu.", "opts": ["那个……我要结账。", "那个……我再看看。", "那个……我要退货。", "那个……我想问问别的。"], "ans": 0, "natural": "购物场景里「会計」也是结账。和餐厅用法一致。", "words": [["会計（かいけい）", "结账"]]}, {"jp": "すみません、袋（ふくろ）別（べつ）につけてもらえますか？", "romaji": "Sumimasen, fukuro betsu ni tsukete moraemasu ka?", "opts": ["不好意思，能分开装袋吗？", "不好意思，能多给我一个袋子吗？", "不好意思，袋子要收费吗？", "不好意思，能帮我包得漂亮点吗？"], "ans": 0, "natural": "「別に」= 分别。「〜てもらえますか」= 能请你……吗（受益表达）。", "words": [["袋（ふくろ）", "袋子"], ["別（べつ）に", "分别地"]]}, {"jp": "これ、同じ（おなじ）やつって、ほかの色（いろ）あります？", "romaji": "Kore, onaji yatsu tte, hoka no iro arimasu?", "opts": ["这个同款有别的颜色吗？", "这个同款有别的尺寸吗？", "这个还有库存吗？", "这个能预订吗？"], "ans": 0, "natural": "「同じやつ」= 同样的东西（口语）。「ほかの色」= 其他颜色。", "words": [["同じ（おなじ）", "同样的"], ["色（いろ）", "颜色"]]}, {"jp": "すみません、値段（ねだん）安（やす）くなりませんか？", "romaji": "Sumimasen, nedan yasukunari masen ka?", "opts": ["不好意思，价格能便宜点吗？", "不好意思，这是最便宜的吗？", "不好意思，能打折吗？", "不好意思，有特价吗？"], "ans": 0, "natural": "「安くなる」= 变便宜。「〜ませんか」= 不会……吗（委婉提议）。砍价/问价常用。", "words": [["値段（ねだん）", "价格"], ["安（やす）い", "便宜"]]}, {"jp": "あの、これ、日本（にほん）以外（いがい）でも使（つか）えますか？", "romaji": "Ano, kore, nihon igai demo tsukaemasu ka?", "opts": ["那个……这个在日本以外也能用吗？", "那个……这个国内能保修吗？", "那个……这个有海外版吗？", "那个……这个能寄回国吗？"], "ans": 0, "natural": "「〜以外（いがい）」= 除……之外。「〜でも使える」= 在……也能用，买电器必问。", "words": [["以外（いがい）", "之外"], ["使（つか）える", "能用"]]}, {"jp": "すみません、クレジットカード使（つか）えますか？", "romaji": "Sumimasen, kurejitto kaado tsukaemasu ka?", "opts": ["不好意思，能用信用卡吗？", "不好意思，能刷银联吗？", "不好意思，能扫码支付吗？", "不好意思，有会员卡吗？"], "ans": 0, "natural": "「クレジットカード」= 信用卡。日本很多小店只收现金，务必先问。", "words": [["クレジットカード", "信用卡"], ["使（つか）える", "能用"]]}, {"jp": "あの、また後（あと）で来（き）てもいいですか？", "romaji": "Ano, mata ato de kite mo ii desu ka?", "opts": ["那个……我待会儿再过来可以吗？", "那个……你们几点关门？", "那个……能帮我留着吗？", "那个……能送外卖吗？"], "ans": 0, "natural": "「また後で」= 改天/待会儿。「〜てもいいですか」= 可以……吗。想再去别处逛逛时的说法。", "words": [["また", "再"], ["後（あと）で", "待会儿"]]}]}, "ask": {"icon": "🗺️", "name": "问路问事", "tip": "厕所在哪、还有多远……被问到最多的其实是这些。", "qa": [{"jp": "あの、トイレって、どこですか？", "romaji": "Ano, toire tte, doko desu ka?", "opts": ["那个……厕所在哪里？", "那个……电梯在哪？", "那个……出口在哪？", "那个……服务台在哪？"], "ans": 0, "natural": "「トイレ」= 厕所。「〜ってどこですか」= ……在哪，极简口语。", "words": [["トイレ", "厕所"], ["どこ", "哪里"]]}, {"jp": "すみません、ここから浅草（あさくさ）まで、歩（ある）いてどのくらいかかりますか？", "romaji": "Sumimasen, koko kara Asakusa made, aruite dono kurai kakarimasu ka?", "opts": ["不好意思，从这里到浅草步行要多久？", "不好意思，从这里到浅草怎么走？", "不好意思，从这里到浅草多远？", "不好意思，从这里到浅草要坐什么车？"], "ans": 0, "natural": "「〜から〜まで」= 从……到……「歩いて」= 步行。「どのくらいかかりますか」= 要花多久。", "words": [["歩（ある）く", "步行"], ["どのくらい", "多久/多少"]]}, {"jp": "あの、英語（えいご）のパンフレットってあります？", "romaji": "Ano, eigo no panfuretto tte arimasu?", "opts": ["那个……有英文的小册子吗？", "那个……有中文的导览吗？", "那个……有语音导览吗？", "那个……有地图吗？"], "ans": 0, "natural": "「パンフレット」= pamphlet，宣传册/导览册。景点游客中心常备多语言版。", "words": [["英語（えいご）", "英语"], ["パンフレット", "小册子"]]}, {"jp": "すみません、この近（ちか）くにコンビニあります？", "romaji": "Sumimasen, kono chikaku ni konbini arimasu?", "opts": ["不好意思，这附近有便利店吗？", "不好意思，这附近有餐厅吗？", "不好意思，这附近有药店吗？", "不好意思，这附近有车站吗？"], "ans": 0, "natural": "「この近くに」= 这附近。「コンビニ」= 便利店。句尾「あります？」升调，省略礼貌体。", "words": [["近（ちか）く", "附近"], ["コンビニ", "便利店"]]}, {"jp": "あの、道（みち）に迷（まよ）っちゃったんですけど…", "romaji": "Ano, michi ni mayocchattan desu kedo…", "opts": ["那个……我好像迷路了……", "那个……我走错方向了……", "那个……路被封了……", "那个……我找不到集合点了……"], "ans": 0, "natural": "「迷っちゃった」= 「迷ってしまった」的口语，表示不小心迷路了。「んですけど」把问题抛给对方。", "words": [["道（みち）", "路"], ["迷（まよ）う", "迷路"], ["〜ちゃった", "〜てしまった（口语）"]]}, {"jp": "すみません、写真（しゃしん）撮（と）ってもらえますか？", "romaji": "Sumimasen, shashin totte moraemasu ka?", "opts": ["不好意思，能帮我拍张照吗？", "不好意思，这里能拍照吗？", "不好意思，能帮我录视频吗？", "不好意思，能帮我拿一下包吗？"], "ans": 0, "natural": "「〜てもらえますか」= 能请你……吗，万能请求句。请路人帮忙拍照必备。", "words": [["写真（しゃしん）", "照片"], ["撮（と）る", "拍摄"]]}, {"jp": "あの、Wi-Fiってどこでつなげますか？", "romaji": "Ano, Wi-Fi tte doko de tsunagemasu ka?", "opts": ["那个……WiFi在哪里连？", "那个……WiFi密码是多少？", "那个……这里有免费WiFi吗？", "那个……WiFi信号好吗？"], "ans": 0, "natural": "「つなげる」= 连接。「〜でつなげますか」= 在哪能连。", "words": [["Wi-Fi", "无线网络"], ["つなげる", "连接"]]}, {"jp": "すみません、観光案内所（かんこうあんないじょ）はどこですか？", "romaji": "Sumimasen, kankou annaisho wa doko desu ka?", "opts": ["不好意思，旅游咨询中心在哪里？", "不好意思，观光巴士站在哪？", "不好意思，游客中心几点开门？", "不好意思，景区入口在哪？"], "ans": 0, "natural": "「観光案内所（かんこうあんないじょ）」= 旅游咨询中心，站内/景区常见。", "words": [["観光（かんこう）", "观光"], ["案内所（あんないじょ）", "咨询处"]]}, {"jp": "あの、この電車（でんしゃ）、渋谷（しぶや）に止（と）まりますか？", "romaji": "Ano, kono densha, Shibuya ni tomarimasu ka?", "opts": ["那个……这趟电车在涩谷停吗？", "那个……这趟电车是去涩谷的吗？", "那个……到涩谷要坐几站？", "那个……涩谷是下一站吗？"], "ans": 0, "natural": "「止まる」= 停（车）。日本有些快车不停小站，上车前务必确认。", "words": [["止（と）まる", "停"], ["電車（でんしゃ）", "电车"]]}, {"jp": "すみません、ここ、禁煙（きんえん）ですか？", "romaji": "Sumimasen, koko, kin'en desu ka?", "opts": ["不好意思，这里是无烟区吗？", "不好意思，这里能吸烟吗？", "不好意思，有吸烟室吗？", "不好意思，附近有吸烟区吗？"], "ans": 0, "natural": "「禁煙（きんえん）」= 禁烟/无烟。日本室内几乎全禁烟，找吸烟室要问。", "words": [["禁煙（きんえん）", "禁烟"]]}]}, "hotel": {"icon": "🏨", "name": "酒店入住", "tip": "check-in、WiFi、行李寄存……安顿下来全靠你。", "qa": [{"jp": "すみません、チェックインって何時（なんじ）からですか？", "romaji": "Sumimasen, chekkuin tte nanji kara desu ka?", "opts": ["不好意思，入住从几点开始？", "不好意思，入住到几点截止？", "不好意思，退房是几点？", "不好意思，最早几点能入住？"], "ans": 0, "natural": "「チェックイン」= check in。「〜から」= 从……起。", "words": [["チェックイン", "入住"], ["何時（なんじ）", "几点"]]}, {"jp": "あの、Wi-Fiのパスワードって、何（なん）ですか？", "romaji": "Ano, Wi-Fi no pasuwaado tte, nan desu ka?", "opts": ["那个……WiFi密码是多少？", "那个……WiFi叫什么名字？", "那个……WiFi要收费吗？", "那个……WiFi信号弱怎么办？"], "ans": 0, "natural": "「パスワード」= password。直白地问即可，工作人员会写在纸上给你。", "words": [["パスワード", "密码"]]}, {"jp": "すみません、荷物（にもつ）を預（あず）かってもらえますか？", "romaji": "Sumimasen, nimotsu o azukatte moraemasu ka?", "opts": ["不好意思，能帮我寄存行李吗？", "不好意思，行李能送到房间吗？", "不好意思，能帮我搬行李吗？", "不好意思，行李寄存到几点？"], "ans": 0, "natural": "「預かる」= 保管、寄存。「〜てもらえますか」受益请求句。退房后寄存很常见。", "words": [["荷物（にもつ）", "行李"], ["預（あず）かる", "寄存、保管"]]}, {"jp": "あの、チェックアウトは何時（なんじ）までですか？", "romaji": "Ano, chekkuauto wa nanji made desu ka?", "opts": ["那个……退房到几点为止？", "那个……能延迟退房吗？", "那个……退房要办手续吗？", "那个……退房能把行李先放这吗？"], "ans": 0, "natural": "「チェックアウト」= check out。「〜まで」= 到……为止。", "words": [["チェックアウト", "退房"], ["まで", "到……为止"]]}, {"jp": "すみません、ドライヤーってあります？", "romaji": "Sumimasen, doraiyaa tte arimasu?", "opts": ["不好意思，有吹风机吗？", "不好意思，有热水壶吗？", "不好意思，有拖鞋吗？", "不好意思，有转换器吗？"], "ans": 0, "natural": "「ドライヤー」= 吹风机（外来语）。日本酒店房间常不配，向前台借。", "words": [["ドライヤー", "吹风机"]]}, {"jp": "あの、部屋（へや）の鍵（かぎ）をなくしちゃったみたいなんです…", "romaji": "Ano, heya no kagi o nakushichatta mitai nan desu…", "opts": ["那个……我好像把房间钥匙弄丢了……", "那个……我好像把房卡锁房间里了……", "那个……房间的钥匙打不开……", "那个……能帮我再配一把钥匙吗？"], "ans": 0, "natural": "「なくしちゃった」= 「なくしてしまった」口语，不小心弄丢了。「みたい」= 好像。", "words": [["鍵（かぎ）", "钥匙"], ["なくす", "弄丢"], ["みたい", "好像"]]}, {"jp": "すみません、朝食（ちょうしょく）はどこでいただきますか？", "romaji": "Sumimasen, choushoku wa doko de itadakimasu ka?", "opts": ["不好意思，早餐在哪里吃？", "不好意思，早餐几点开始？", "不好意思，早餐包含什么？", "不好意思，能送到房间吗？"], "ans": 0, "natural": "「いただく」= 吃/喝的谦让语（比「食べる」礼貌）。问餐厅位置。", "words": [["朝食（ちょうしょく）", "早餐"], ["いただく", "吃（谦让语）"]]}, {"jp": "あの、タオル、追加（ついか）でもらえますか？", "romaji": "Ano, taoru, tsuika de moraemasu ka?", "opts": ["那个……能再多给我几条毛巾吗？", "那个……毛巾能换吗？", "那个……有浴巾吗？", "那个……毛巾要收费吗？"], "ans": 0, "natural": "「追加（ついか）」= 追加、再加。「〜てもらえますか」请求句。", "words": [["タオル", "毛巾"], ["追加（ついか）", "追加"]]}, {"jp": "すみません、近（ちか）くにおすすめのお店（みせ）あります？", "romaji": "Sumimasen, chikaku ni osusume no omise arimasu?", "opts": ["不好意思，这附近有推荐的店吗？", "不好意思，这附近有便利店吗？", "不好意思，这附近有什么好玩的吗？", "不好意思，这附近安全吗？"], "ans": 0, "natural": "「おすすめのお店」= 推荐的店。请前台推荐餐厅最靠谱。", "words": [["おすすめ", "推荐"], ["お店（みせ）", "店"]]}, {"jp": "あの、領収書（りょうしゅうしょ）って、いただけますか？", "romaji": "Ano, ryoushuusho tte, itadakemasu ka?", "opts": ["那个……能给我收据吗？", "那个……能开发票吗？", "那个……费用明细能给我吗？", "那个……能刷卡付吗？"], "ans": 0, "natural": "「領収書（りょうしゅうしょ）」= 收据。「〜いただけますか」= 能请您给我……吗。", "words": [["領収書（りょうしゅうしょ）", "收据"]]}]}, "drug": {"icon": "💊", "name": "药妆店", "tip": "朋友扫货的重头戏，看成分、算免税、找替代品。", "qa": [{"jp": "あの、これ、何（なん）に効（き）く薬（くすり）なんですか？", "romaji": "Ano, kore, nan ni kiku kusuri nan desu ka?", "opts": ["那个……这是治什么的药？", "那个……这个药怎么吃？", "那个……这个药有副作用吗？", "那个……这个药要处方吗？"], "ans": 0, "natural": "「〜に効く」= 对……有效。买药最该问的一句话，确认对症。", "words": [["効（き）く", "有效"], ["薬（くすり）", "药"]]}, {"jp": "これ、もっと安（やす）いのってあります？", "romaji": "Kore, motto yasui no tte arimasu?", "opts": ["这个有更便宜的类似款吗？", "这个是最便宜的吗？", "这个能打折吗？", "这个有促销吗？"], "ans": 0, "natural": "「もっと安いの」= 更便宜的。「〜ってあります？」= 有……吗。让店员推荐平价替代品。", "words": [["もっと", "更"], ["安（やす）い", "便宜"]]}, {"jp": "すみません、化粧品（けしょうひん）の免税（めんぜい）ってどこですか？", "romaji": "Sumimasen, keshoukihin no menzei tte doko desu ka?", "opts": ["不好意思，化妆品的免税是在哪里办？", "不好意思，化妆品有免税额度吗？", "不好意思，化妆品免税要护照吗？", "不好意思，化妆品免税能退现金吗？"], "ans": 0, "natural": "「化粧品（けしょうひん）」= 化妆品。日本药妆店通常满额后统一在收银台办免税。", "words": [["化粧品（けしょうひん）", "化妆品"], ["免税（めんぜい）", "免税"]]}, {"jp": "あの、これ、日本（にほん）以外（いがい）でも使（つか）えますか？", "romaji": "Ano, kore, nihon igai demo tsukaemasu ka?", "opts": ["那个……这个在日本以外也能用吗？", "那个……这个国内能保修吗？", "那个……这个有海外版吗？", "那个……这个能寄回国吗？"], "ans": 0, "natural": "买电器/电子产品时必问电压规格。「〜以外でも」= 除此之外也能。", "words": [["以外（いがい）", "之外"], ["使（つか）える", "能用"]]}, {"jp": "すみません、肌（はだ）に優（やさ）しいやつあります？", "romaji": "Sumimasen, hada ni yasashii yatsu arimasu?", "opts": ["不好意思，有温和（对皮肤友好）的吗？", "不好意思，有敏感肌专用的吗？", "不好意思，有防过敏的吗？", "不好意思，有纯天然的吗？"], "ans": 0, "natural": "「肌に優しい」= 对皮肤温和/友好，是日本人描述护肤品的常用说法。", "words": [["肌（はだ）", "皮肤"], ["優（やさ）しい", "温和的"]]}, {"jp": "あの、サンプルってもらえますか？", "romaji": "Ano, sanpuru tte moraemasu ka?", "opts": ["那个……能给我试用装吗？", "那个……能试用吗？", "那个……有赠品吗？", "那个……能先试一下吗？"], "ans": 0, "natural": "「サンプル」= sample，试用装。药妆店常备，开口要往往能给。", "words": [["サンプル", "试用装"]]}, {"jp": "すみません、売（う）り切（き）れですか？", "romaji": "Sumimasen, urikire desu ka?", "opts": ["不好意思，是卖完了吗？", "不好意思，今天打烊了吗？", "不好意思，不卖了改放了吗？", "不好意思，能调货吗？"], "ans": 0, "natural": "「売り切れ」= 售罄。看到空架位时问店员。", "words": [["売（う）り切（き）れ", "售罄"]]}, {"jp": "あの、同じ（おなじ）やつ、ほかの店（みせ）でも売（う）ってます？", "romaji": "Ano, onaji yatsu, hoka no mise demo utte masu?", "opts": ["那个……同款别的店也有卖吗？", "那个……同款还有库存吗？", "那个……别的地方更便宜吗？", "那个……能网购吗？"], "ans": 0, "natural": "「〜でも売ってます？」= 在……也卖吗。货比三家时的说法。", "words": [["同じ（おなじ）", "同样的"], ["売（う）る", "卖"]]}, {"jp": "すみません、これ、日本（にほん）の何（なん）カップですか？", "romaji": "Sumimasen, kore, nihon no nan kappu desu ka?", "opts": ["不好意思，这个是日本的几号杯？", "不好意思，这个是多大的尺码？", "不好意思，这个是给谁用的？", "不好意思，这个一次用多少？"], "ans": 0, "natural": "「カップ」= cup，胸罩尺码。日本尺码和国内不同，务必确认。", "words": [["カップ", "罩杯"], ["何（なん）", "几"]]}, {"jp": "あの、ポイントカードって、作（つく）れます？", "romaji": "Ano, pointo kaado tte, tsukuremasu?", "opts": ["那个……能办张积分卡吗？", "那个……有会员卡吗？", "那个……积分能抵现吗？", "那个……积分能退吗？"], "ans": 0, "natural": "「ポイントカード」= 积分卡。药妆店积分很划算，结账前问一句。", "words": [["ポイントカード", "积分卡"], ["作（つく）る", "办、做"]]}]}, "izakaya": {"icon": "🍻", "name": "居酒屋", "tip": "晚上聚餐必备，お通し、单点、无酒精饮料……", "qa": [{"jp": "あの、おすすめの料理（りょうり）ってあります？", "romaji": "Ano, osusume no ryouri tte arimasu?", "opts": ["那个……有推荐的菜吗？", "那个……有招牌菜吗？", "那个……有季节限定吗？", "那个……有什么下酒菜？"], "ans": 0, "natural": "「おすすめ」= 推荐。居酒屋点餐直接问店员推荐最稳。", "words": [["おすすめ", "推荐"], ["料理（りょうり）", "菜"]]}, {"jp": "すみません、これ、お通（とお）しっていうやつですか？", "romaji": "Sumimasen, kore, o-tooshi tte iu yatsu desu ka?", "opts": ["不好意思，这个就是那个入座必上的小菜吗？", "不好意思，这道是赠送的吗？", "不好意思，这道菜要提前点吗？", "不好意思，这道是每人一份吗？"], "ans": 0, "natural": "「お通し（おとうし）」= 居酒屋入座必上的小菜，通常按人头收费。外国人常误以为是免费的。", "words": [["お通（とお）し", "入座小菜"]]}, {"jp": "あの、ノンアルコールってあります？", "romaji": "Ano, non-arukooru tte arimasu?", "opts": ["那个……有无酒精饮料吗？", "那个……有低酒精的吗？", "那个……有软饮吗？", "那个……有热饮吗？"], "ans": 0, "natural": "「ノンアルコール」= non-alcohol，无酒精啤酒/饮料。开车或不能喝酒的朋友必备。", "words": [["ノンアルコール", "无酒精"]]}, {"jp": "すみません、飲（の）み放題（ほうだい）ってありますか？", "romaji": "Sumimasen, nomihoudai tte arimasu ka?", "opts": ["不好意思，有畅饮（喝到饱）吗？", "不好意思，有吃到饱吗？", "不好意思，有套餐吗？", "不好意思，有时间限制吗？"], "ans": 0, "natural": "「飲み放題（のみほうだい）」= 畅饮。居酒屋常见，通常限时90-120分钟。", "words": [["飲（の）み放題（ほうだい）", "畅饮"]]}, {"jp": "あの、これ、何人前（にんまえ）ですか？", "romaji": "Ano, kore, nan ninmae desu ka?", "opts": ["那个……这个是几人份？", "那个……这个是几个？", "那个……这个要等很久吗？", "那个……这个能分盘吗？"], "ans": 0, "natural": "「〜人前（にんまえ）」= ……人份。日本很多居酒屋菜是2人份起。", "words": [["人前（にんまえ）", "人份"]]}, {"jp": "すみません、タバコって吸（す）えるとこありますか？", "romaji": "Sumimasen, tabako tte sueru toko arimasu ka?", "opts": ["不好意思，有能吸烟的地方吗？", "不好意思，这里能吸烟吗？", "不好意思，有吸烟室吗？", "不好意思，禁烟吗？"], "ans": 0, "natural": "「〜えるとこ」= 「〜えるところ」，能……的地方。日本室内大多禁烟，找吸烟区要问。", "words": [["タバコ", "烟"], ["吸（す）う", "吸"]]}, {"jp": "あの、頼（たの）んだやつ、まだですか？", "romaji": "Ano, tanonda yatsu, mada desu ka?", "opts": ["那个……我点的那个还没好吗？", "那个……我点的那个上错了？", "那个……我点的那个取消一下", "那个……我点的那个能快点吗？"], "ans": 0, "natural": "「頼んだ」= 点了的。「やつ」= 那个东西。催菜时的口语。", "words": [["頼（たの）む", "点（菜）"], ["まだ", "还没"]]}, {"jp": "すみません、持（も）ち帰（かえ）りってできます？", "romaji": "Sumimasen, mochikaeri tte dekimasu?", "opts": ["不好意思，能打包带走吗？", "不好意思，能外送吗？", "不好意思，能预约吗？", "不好意思，能开发票吗？"], "ans": 0, "natural": "「持ち帰り」= 打包。部分居酒屋允许打包剩余食物。", "words": [["持（も）ち帰（かえ）り", "打包"]]}, {"jp": "あの、お箸（はし）とお皿（さら）って、もらえますか？", "romaji": "Ano, o-hashi to o-sara tte, moraemasu ka?", "opts": ["那个……能再给我几双筷子几个盘子吗？", "那个……有一次性筷子吗？", "那个……有公筷吗？", "那个……能帮我分一下吗？"], "ans": 0, "natural": "「お箸（はし）」= 筷子，「お皿（さら）」= 盘子。人多聚餐时必备。", "words": [["お箸（はし）", "筷子"], ["お皿（さら）", "盘子"]]}, {"jp": "すみません、ラストオーダーって何時（なんじ）ですか？", "romaji": "Sumimasen, rasuto-oodaa tte nanji desu ka?", "opts": ["不好意思，最后点单是几点？", "不好意思，打烊是几点？", "不好意思，还能再点吗？", "不好意思，有夜宵吗？"], "ans": 0, "natural": "「ラストオーダー」= last order，最后点单时间。错过就只能喝饮料了。", "words": [["ラストオーダー", "最后点单"]]}]}, "shrine": {"icon": "⛩️", "name": "神社寺庙", "tip": "参拜礼仪、御守、绘马……朋友一定好奇这些。", "qa": [{"jp": "あの、ここ、写真（しゃしん）撮影（さつえい）OKですか？", "romaji": "Ano, koko, shashin satsuei OK desu ka?", "opts": ["那个……这里拍照可以吗？", "那个……这里能录像吗？", "那个……能合影吗？", "那个……有专业摄影师吗？"], "ans": 0, "natural": "「撮影OK」= 可以拍摄。部分神社内部、佛像前禁止拍照，先问。", "words": [["撮影（さつえい）", "拍摄"], ["OK", "可以"]]}, {"jp": "すみません、お賽銭（さいせん）って、普通（ふつう）いくら入（い）れるものですか？", "romaji": "Sumimasen, o-saisen tte, futsuu ikura ireru mono desu ka?", "opts": ["不好意思，赛钱一般放多少？", "不好意思，赛钱要放吗？", "不好意思，赛钱在哪买？", "不好意思，赛钱放几次？"], "ans": 0, "natural": "「お賽銭（おさいせん）」= 投进赛钱箱的香火钱。「普通いくら」= 一般多少。5円（ご縁=缘分）最吉利。", "words": [["お賽銭（さいせん）", "香火钱"], ["普通（ふつう）", "一般"]]}, {"jp": "あの、お守（まも）りって、どこで買（か）えますか？", "romaji": "Ano, o-mamori tte, doko de kaemasu ka?", "opts": ["那个……御守在哪里买？", "那个……御守有几种？", "那个……御守有效期多久？", "那个……御守能送人吗？"], "ans": 0, "natural": "「お守り（おまもり）」= 御守、护身符。神社经典伴手礼。", "words": [["お守（まも）り", "御守"], ["買（か）う", "买"]]}, {"jp": "すみません、参拝（さんぱい）の仕方（しかた）を教（おし）えてもらえますか？", "romaji": "Sumimasen, sanpai no shikata o oshiete moraemasu ka?", "opts": ["不好意思，能教我参拜的方法吗？", "不好意思，参拜有时间吗？", "不好意思，参拜要收费吗？", "不好意思，参拜有顺序吗？"], "ans": 0, "natural": "「仕方（しかた）」= 方法。「〜てもらえますか」= 能请你……吗。二礼二拍手一礼不懂就直接问。", "words": [["参拝（さんぱい）", "参拜"], ["仕方（しかた）", "方法"]]}, {"jp": "あの、絵馬（えま）って、どこで書（か）くんですか？", "romaji": "Ano, ema tte, doko de kaku n desu ka?", "opts": ["那个……绘马是在哪里写？", "那个……绘马怎么挂？", "那个……绘马有规定内容吗？", "那个……绘马写错了能改吗？"], "ans": 0, "natural": "「絵馬（えま）」= 绘马，写下愿望的小木板。买后现场写，挂在指定的架上。", "words": [["絵馬（えま）", "绘马"], ["書（か）く", "写"]]}, {"jp": "すみません、この神社（じんじゃ）、どんな御利益（ごりやく）があるんですか？", "romaji": "Sumimasen, kono jinja, don'na goriyaku ga aru n desu ka?", "opts": ["不好意思，这个神社有什么样的庇佑？", "不好意思，这个神社供奉的是谁？", "不好意思，这个神社有多少年历史？", "不好意思，这个神社有名吗？"], "ans": 0, "natural": "「御利益（ごりやく）」= 灵验、庇佑。问神社管什么最灵（恋爱/学业/生意）。", "words": [["神社（じんじゃ）", "神社"], ["御利益（ごりやく）", "庇佑、灵验"]]}, {"jp": "あの、靴（くつ）って、脱（ぬ）ぐやつですか？", "romaji": "Ano, kutsu tte, nugu yatsu desu ka?", "opts": ["那个……是要脱鞋的那种吗？", "那个……有鞋套吗？", "那个……鞋放哪里？", "那个……能穿鞋进去吗？"], "ans": 0, "natural": "「〜やつですか」= 是那种……的吗。进寺庙本堂常需脱鞋，直接问最清楚。", "words": [["靴（くつ）", "鞋"], ["脱（ぬ）ぐ", "脱"]]}, {"jp": "すみません、朱印（しゅいん）って、もらえるんですか？", "romaji": "Sumimasen, shuin tte, moraeru n desu ka?", "opts": ["不好意思，能给我朱印吗？", "不好意思，朱印是什么？", "不好意思，朱印要收费吗？", "不好意思，朱印要排队吗？"], "ans": 0, "natural": "「朱印（しゅいん）」= 朱印，手写御朱印。参拜者在朱印账上收集，近年很流行。", "words": [["朱印（しゅいん）", "朱印"]]}, {"jp": "あの、おみくじって、どうやって引（ひ）くんですか？", "romaji": "Ano, omikuji tte, dou yatte hiku n desu ka?", "opts": ["那个……抽签要怎么抽？", "那个……抽签要付钱吗？", "那个……抽到凶怎么办？", "那个……抽签能抽几次？"], "ans": 0, "natural": "「おみくじ」= 神签。通常投币100円后从签筒抽，凶签绑在指定架上留在这里。", "words": [["おみくじ", "神签"], ["引（ひ）く", "抽"]]}, {"jp": "すみません、ここって、参拝（さんぱい）できる時間（じかん）ありますか？", "romaji": "Sumimasen, koko tte, sanpai dekiru jikan arimasu ka?", "opts": ["不好意思，这里参拜有时间限制吗？", "不好意思，这里全天开放吗？", "不好意思，这里几点关门？", "不好意思，这里晚上能来吗？"], "ans": 0, "natural": "「〜できる時間」= 能……的时间。部分神社社务所（卖御守/朱印的地方）有营业时间，但参拜区域24小时。", "words": [["時間（じかん）", "时间"], ["参拝（さんぱい）", "参拜"]]}]}, "airport": {"icon": "✈️", "name": "机场出入", "tip": "来去各一次，值机、托运、安检、退税。", "qa": [{"jp": "すみません、セキュリティチェックって、どこですか？", "romaji": "Sumimasen, sekyuriti-chekku tte, doko desu ka?", "opts": ["不好意思，安检在哪里？", "不好意思，值机柜台在哪？", "不好意思，退税在哪？", "不好意思，登机口在哪？"], "ans": 0, "natural": "「セキュリティチェック」= 安检。成田/羽田机场安检在出境审查之后。", "words": [["セキュリティチェック", "安检"]]}, {"jp": "あの、この荷物（にもつ）、預（あず）けられますか？", "romaji": "Ano, kono nimotsu, azukeraremasu ka?", "opts": ["那个……这个行李能托运吗？", "那个……这个行李要收费吗？", "那个……这个行李能带上飞机吗？", "那个……这个行李算超重吗？"], "ans": 0, "natural": "「預ける」= 托运。液体/超尺寸需托运，务必提前确认。", "words": [["荷物（にもつ）", "行李"], ["預（あず）ける", "托运"]]}, {"jp": "すみません、出国税（ちゅうこくぜい）って、どこで払（はら）うんですか？", "romaji": "Sumimasen, shukkokuzei tte, doko de harau n desu ka?", "opts": ["不好意思，出国税是在哪里交？", "不好意思，出国税要多少？", "不好意思，出国税包含什么？", "不好意思，出国税能退吗？"], "ans": 0, "natural": "「出国税（しゅっこくぜい）」= 国际观光旅客税（1000日元），通常已含在机票里，但有时需现场确认。", "words": [["出国税（しゅっこくぜい）", "出国税"], ["払（はら）う", "支付"]]}, {"jp": "あの、免税（めんぜい）の手続（てつづ）きって、どこですか？", "romaji": "Ano, menzei no tetsudzuki tte, doko desu ka?", "opts": ["那个……免税手续在哪里办？", "那个……免税额度是多少？", "那个……免税要护照吗？", "那个……免税能退现金吗？"], "ans": 0, "natural": "机场也有免税柜台/专用通道，买大件（电器等）可在机场办。", "words": [["免税（めんぜい）", "免税"], ["手続（てつづ）き", "手续"]]}, {"jp": "すみません、荷物（にもつ）が届（とど）かないんですけど…", "romaji": "Sumimasen, nimotsu ga todokanai n desu kedo…", "opts": ["不好意思，我的行李没到（没出来）……", "不好意思，我的行李坏了……", "不好意思，我的行李超重了……", "不好意思，我的行李被扣了……"], "ans": 0, "natural": "「届かない」= 没送到/没出来。行李转盘等了很久没出来时用。", "words": [["届（とど）く", "送到"], ["荷物（にもつ）", "行李"]]}, {"jp": "あの、ゲートって、何番（なんばん）ですか？", "romaji": "Ano, geeto tte, nanban desu ka?", "opts": ["那个……登机口是几号？", "那个……航班是几号？", "那个……行李转盘是几号？", "那个……值机柜台是几号？"], "ans": 0, "natural": "「ゲート」= gate，登机口。登机牌上写着，找不到就问工作人员。", "words": [["ゲート", "登机口"], ["何番（なんばん）", "几号"]]}, {"jp": "すみません、ここ、飲（の）み物（もの）買（か）えるとこありますか？", "romaji": "Sumimasen, koko, nomimono kaeru toko arimasu ka?", "opts": ["不好意思，这里有卖饮料的地方吗？", "不好意思，这里有水吗？", "不好意思，这里有餐厅吗？", "不好意思，这里有便利店吗？"], "ans": 0, "natural": "「飲み物買えるとこ」= 「飲み物を買えるところ」，能买饮料的地方。口语省略助词。", "words": [["飲（の）み物（もの）", "饮料"], ["買（か）う", "买"]]}, {"jp": "あの、電源（でんげん）って、どこにあります？", "romaji": "Ano, dengen tte, doko ni arimasu?", "opts": ["那个……电源插座在哪里？", "那个……充电宝在哪借？", "那个……WiFi在哪连？", "那个……有休息室吗？"], "ans": 0, "natural": "「電源（でんげん）」= 电源插座。候机时手机没电很常见，找充电位。", "words": [["電源（でんげん）", "电源"], ["あります", "有"]]}, {"jp": "すみません、搭乗（とうじょう）時間（じかん）はいつですか？", "romaji": "Sumimasen, toujou jikan wa itsu desu ka?", "opts": ["不好意思，登机时间是什么时候？", "不好意思，起飞时间是什么时候？", "不好意思，值机什么时候开始？", "不好意思，还有多久登机？"], "ans": 0, "natural": "「搭乗（とうじょう）」= 登机。「いつですか」= 什么时候。", "words": [["搭乗（とうじょう）", "登机"], ["時間（じかん）", "时间"]]}, {"jp": "あの、フライト遅（おく）れてますか？", "romaji": "Ano, furatto okurete masu ka?", "opts": ["那个……航班晚点了吗？", "那个……航班取消了吗？", "那个……航班改时间了吗？", "那个……还能赶上吗？"], "ans": 0, "natural": "「遅れる」= 晚点。简洁的口语，句尾「ますか」礼貌体。", "words": [["フライト", "航班"], ["遅（おく）れる", "晚点"]]}]}, "emergency": {"icon": "🆘", "name": "突发状况", "tip": "最考验导游的一关，钱包丢了、人不舒服，第一时间你得顶上。", "qa": [{"jp": "すみません、財布（さいふ）をなくしちゃったみたいなんです…", "romaji": "Sumimasen, saifu o nakushichatta mitai nan desu…", "opts": ["不好意思，我好像把钱包弄丢了……", "不好意思，我好像把手机弄丢了……", "不好意思，我好像迷路了……", "不好意思，我好像被偷了……"], "ans": 0, "natural": "「なくしちゃった」= 「なくしてしまった」口语，不小心弄丢了。「みたい」= 好像。报警/找工作人员第一句。", "words": [["財布（さいふ）", "钱包"], ["なくす", "弄丢"], ["みたい", "好像"]]}, {"jp": "あの、体（からだ）の調子（ちょうし）が悪（わる）いんですけど…", "romaji": "Ano, karada no choushi ga warui n desu kedo…", "opts": ["那个……我身体不太舒服……", "那个……我肚子很痛……", "那个……我头晕……", "那个……我想吐……"], "ans": 0, "natural": "「調子が悪い」= 状态不好、不舒服。万能说法，涵盖各种身体不适。", "words": [["体（からだ）", "身体"], ["調子（ちょうし）", "状态"], ["悪（わる）い", "不好"]]}, {"jp": "すみません、警察（けいさつ）を呼（よ）んでいただけますか？", "romaji": "Sumimasen, keisatsu o yonde itadakemasu ka?", "opts": ["不好意思，能帮我叫警察吗？", "不好意思，能帮我叫救护车吗？", "不好意思，能帮我叫店长吗？", "不好意思，能帮我叫翻译吗？"], "ans": 0, "natural": "「警察（けいさつ）を呼ぶ」= 叫警察。「〜いただけますか」= 能请您……吗，最礼貌的请求。", "words": [["警察（けいさつ）", "警察"], ["呼（よ）ぶ", "叫、呼叫"]]}, {"jp": "あの、道（みち）に迷（まよ）っちゃったみたいなんです…", "romaji": "Ano, michi ni mayocchattan desu…", "opts": ["那个……我好像迷路了……", "那个……我找不到集合点了……", "那个……地图看不懂了……", "那个……走错方向了……"], "ans": 0, "natural": "「迷っちゃった」= 迷路了。「みたい」= 好像。向路人/店员求助。", "words": [["道（みち）", "路"], ["迷（まよ）う", "迷路"]]}, {"jp": "すみません、パスポートをなくしちゃったんです…", "romaji": "Sumimasen, pasupooto o nakushichattan desu…", "opts": ["不好意思，我把护照弄丢了……", "不好意思，我的护照被偷了……", "不好意思，我的护照过期了……", "不好意思，我忘带护照了……"], "ans": 0, "natural": "「パスポート」= 护照。丢失后需联系本国驻日使领馆，先报警拿遗失证明。", "words": [["パスポート", "护照"], ["なくす", "弄丢"]]}, {"jp": "あの、救急車（きゅうきゅうしゃ）って、呼（よ）べますか？", "romaji": "Ano, kyuukyuusha tte, yobemasu ka?", "opts": ["那个……能叫救护车吗？", "那个……有急救箱吗？", "那个……最近的医院在哪？", "那个……能帮我联系家属吗？"], "ans": 0, "natural": "「救急車（きゅうきゅうしゃ）」= 救护车。紧急情况打119，也可请店员帮忙叫。", "words": [["救急車（きゅうきゅうしゃ）", "救护车"], ["呼（よ）ぶ", "呼叫"]]}, {"jp": "すみません、日本語（にほんご）が分（わ）からないんですけど…通訳（つうやく）はいませんか？", "romaji": "Sumimasen, nihongo ga wakaranai n desu kedo… tsuuyaku wa imasen ka?", "opts": ["不好意思，我听不懂日语……有翻译吗？", "不好意思，有没有会说中文的人？", "不好意思，能帮我打电话吗？", "不好意思，有中文的表格吗？"], "ans": 0, "natural": "「通訳（つうやく）」= 翻译/口译。事故或就医时最需要的一句话。", "words": [["通訳（つうやく）", "翻译"], ["分（わ）かる", "懂、明白"]]}, {"jp": "あの、病院（びょういん）って、どこにありますか？", "romaji": "Ano, byouin tte, doko ni arimasu ka?", "opts": ["那个……医院在哪里？", "那个……药店在哪？", "那个……急诊在哪？", "那个……诊所几点开门？"], "ans": 0, "natural": "「病院（びょういん）」= 医院。身体不舒服想看医生时用。日本也有夜间急诊服务。", "words": [["病院（びょういん）", "医院"]]}, {"jp": "すみません、ここって、盗難（とうなん）にあったんです…", "romaji": "Sumimasen, koko tte, tounan ni attan desu…", "opts": ["不好意思，我在这里被偷了……", "不好意思，这里有监控吗？", "不好意思，这里能报警吗？", "不好意思，这里有人帮忙吗？"], "ans": 0, "natural": "「盗難（とうなん）に遭う」= 遭遇盗窃。正式/书面说法，报警时使用。", "words": [["盗難（とうなん）", "盗窃"], ["遭（あ）う", "遭遇"]]}, {"jp": "あの、誰（だれ）か、日本語（にほんご）話（はな）せる人（ひと）いませんか？", "romaji": "Ano, dareka, nihongo hanaseru hito imasen ka?", "opts": ["那个……有没有会说日语的人？", "那个……有没有会英语的人？", "那个……有没有警察？", "那个……有没有工作人员？"], "ans": 0, "natural": "「誰か」= 某人。「〜せる人」= 会……的人。求助/找人时最实用的句子。", "words": [["誰（だれ）か", "某人"], ["話（はな）せる", "会说"]]}]}};
+const SCENE_ORDER = ["restaurant", "train", "shopping", "ask", "hotel", "drug", "izakaya", "shrine", "airport", "emergency"];
+
+function speak(text){
+  if(!('speechSynthesis' in window)){ alert('您的浏览器不支持语音朗读，请换用 Chrome 或 Edge。'); return; }
+  try{ speechSynthesis.cancel(); }catch(e){}
+  const u=new SpeechSynthesisUtterance(text);
+  try{
+    const voices=speechSynthesis.getVoices();
+    const jp=voices.find(function(v){return v.lang&&v.lang.toLowerCase().indexOf('ja')===0;});
+    if(jp)u.voice=jp;
+  }catch(e){}
+  u.lang='ja-JP';
+  u.rate=0.85;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  try{ speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged=function(){ speechSynthesis.getVoices(); }; }catch(e){}
+}
+
+let state={mode:null,scene:null,idx:0,score:0,wrong:0,order:[]};
+
+function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+function shuffleOptions(q){
+  var items=q.opts.map(function(o,i){return {text:o,ok:i===q.ans};});
+  var sh=shuffle(items);
+  return {jp:q.jp,romaji:q.romaji,natural:q.natural,words:q.words,
+    opts:sh.map(function(s){return s.text;}),ans:sh.findIndex(function(s){return s.ok;})};
+}
+
+var app=document.getElementById('app');
+
+function home(){
+  app.innerHTML=
+  '<div class="hero">'+
+    '<div class="role-badge">🇯🇵 日本旅游日语 · 真实场景训练</div>'+
+    '<h1>日本旅游日语训练器</h1>'+
+    '<p>10大场景 · 100道真实对话题<br>地道口语 + 罗马音 + 真人发音 🔊</p>'+
+  '</div>'+
+  '<div class="card">'+
+    '<div class="tip">💡 <b>怎么用：</b>先选一个身份，再挑场景刷题。每次打开都会随机出题，可反复练。</div>'+
+    '<h3 style="margin:0 0 10px">① 你想扮演哪个角色？</h3>'+
+    '<div class="mode-grid">'+
+      '<div class="mode-card" onclick="start(\'guide\')">'+
+        '<div class="ico">🧑‍🏫</div><h3>导游</h3>'+
+        '<p>看日语选中文翻译，练听力。<br>适合：N1的你。</p>'+
+      '</div>'+
+      '<div class="mode-card" onclick="start(\'tourist\')">'+
+        '<div class="ico">🧳</div><h3>游客</h3>'+
+        '<p>看中文选日语，练开口。<br>适合：日语零基础的朋友。</p>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+
+function start(mode){
+  state.mode=mode; state.scene=null;
+  var isGuide=mode==='guide';
+  app.innerHTML=
+  '<div class="card">'+
+    '<div class="stats">'+
+      '<div><div class="stat-num">10</div><div class="stat-lbl">大场景</div></div>'+
+      '<div><div class="stat-num">100</div><div class="stat-lbl">地道句子</div></div>'+
+      '<div><div class="stat-num" style="color:'+(isGuide?'#e11d48':'#2563eb')+'">'+(isGuide?'导游':'游客')+'</div><div class="stat-lbl">当前身份</div></div>'+
+    '</div>'+
+    '<div class="progress"><i id="pg"></i></div>'+
+  '</div>'+
+  '<div class="card">'+
+    '<h3 style="margin:0 0 4px">② 选一个场景开始练</h3>'+
+    '<p class="sub" style="margin:0 0 12px">'+(isGuide?'看日语选翻译，练听力':'看中文选日语，练开口')+'</p>'+
+    '<div class="scenario-grid" id="sg"></div>'+
+  '</div>';
+  var sg=document.getElementById('sg');
+  SCENE_ORDER.forEach(function(k){
+    var s=SCENES[k];
+    var el=document.createElement('div');
+    el.className='sc-card';
+    el.onclick=function(){enterScene(k);};
+    el.innerHTML='<div class="sc-ico">'+s.icon+'</div><div class="sc-name">'+s.name+'</div><div class="sc-meta">'+s.qa.length+'题 · 从「'+s.tip+'」中出题</div>';
+    sg.appendChild(el);
+  });
+  updatePg(0,10);
+}
+
+function enterScene(key){
+  state.scene=key; state.idx=0; state.score=0; state.wrong=0;
+  state.order=shuffle(SCENES[key].qa.map(function(_,i){return i;}));
+  renderScene();
+}
+
+function renderScene(){
+  var s=SCENES[state.scene];
+  var qi=state.order[state.idx];
+  var q=s.qa[qi];
+  var total=s.qa.length;
+  updatePg(state.idx,total);
+  if(state.mode==='guide') renderGuide(q,total); else renderTourist(q,total);
+}
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function speakBtn(text){
+  return '<button class="speak" onclick="speak('+JSON.stringify(text)+')" title="朗读发音">🔊</button>';
+}
+
+function renderGuide(q,total){
+  var s=SCENES[state.scene];
+  var sq=shuffleOptions(q);
+  app.innerHTML=
+  '<div class="card">'+
+    '<div class="stats">'+
+      '<div><div class="stat-num">'+state.score+'</div><div class="stat-lbl">答对</div></div>'+
+      '<div><div class="stat-num" style="color:#dc2626">'+state.wrong+'</div><div class="stat-lbl">答错</div></div>'+
+      '<div><div class="stat-num">'+(state.idx+1)+'/'+total+'</div><div class="stat-lbl">进度</div></div>'+
+    '</div>'+
+    '<div class="progress"><i id="pg"></i></div>'+
+  '</div>'+
+  '<div class="card">'+
+    '<div class="bubble">'+
+      '<div class="who">'+s.icon+' 游客（我）说：</div>'+
+      speakBtn(q.jp)+
+      '<div class="jp">'+esc(q.jp)+'</div>'+
+      '<div class="romaji">'+esc(q.romaji)+'</div>'+
+    '</div>'+
+    '<p class="sub" style="margin:0 0 10px">👉 这句话的中文意思是？</p>'+
+    '<div class="opts" id="opts"></div>'+
+  '</div>';
+  var opts=document.getElementById('opts');
+  sq.opts.forEach(function(o,i){
+    var b=document.createElement('button');
+    b.className='opt';
+    b.innerHTML=o;
+    b.onclick=function(){pickGuide(b,sq,i===sq.ans,q.natural,q.words,sq.opts[sq.ans]);};
+    opts.appendChild(b);
+  });
+}
+
+function pickGuide(btn,sq,isRight,natural,words,answerText){
+  var all=btn.parentNode.querySelectorAll('.opt');
+  all.forEach(function(o){o.classList.add('disabled');});
+  if(isRight){
+    btn.classList.add('correct'); state.score++;
+    showResult(true,'✅ 正解！',natural,words,answerText,null);
+  }else{
+    btn.classList.add('wrong'); state.wrong++;
+    var rightBtn=Array.prototype.find.call(all,function(o){return o.innerHTML===sq.opts[sq.ans];});
+    if(rightBtn)rightBtn.classList.add('correct');
+    showResult(false,'❌ 惜しい！正确答案是：',natural,words,answerText,null);
+  }
+}
+
+function renderTourist(q,total){
+  var s=SCENES[state.scene];
+  var sq=shuffleOptions(q);
+  var meaning=sq.opts[sq.ans];
+  app.innerHTML=
+  '<div class="card">'+
+    '<div class="stats">'+
+      '<div><div class="stat-num">'+state.score+'</div><div class="stat-lbl">答对</div></div>'+
+      '<div><div class="stat-num" style="color:#dc2626">'+state.wrong+'</div><div class="stat-lbl">答错</div></div>'+
+      '<div><div class="stat-num">'+(state.idx+1)+'/'+total+'</div><div class="stat-lbl">进度</div></div>'+
+    '</div>'+
+    '<div class="progress"><i id="pg"></i></div>'+
+  '</div>'+
+  '<div class="card">'+
+    '<div class="bubble" style="border-radius:16px 16px 4px 16px;border-left:4px solid #2563eb">'+
+      '<div class="who" style="color:#2563eb">🧳 你要表达的意思：</div>'+
+      '<div class="jp" style="font-size:19px">'+esc(meaning)+'</div>'+
+      '<div class="kana-hint">（中文意思已给出，请选出对应的日语）</div>'+
+    '</div>'+
+    '<p class="sub" style="margin:0 0 10px">👉 这句话用日语怎么说？</p>'+
+    '<div class="opts" id="opts"></div>'+
+  '</div>';
+  var opts=document.getElementById('opts');
+  sq.opts.forEach(function(o,i){
+    var isAns=(i===sq.ans);
+    var b=document.createElement('button');
+    b.className='opt';
+    var romajiTxt=isAns?q.romaji:'';
+    b.innerHTML='<div>'+o+'</div>'+(romajiTxt?'<div class="romaji" style="margin-top:4px">'+esc(romajiTxt)+'</div>':'');
+    b.onclick=function(){pickTourist(b,isAns,q);};
+    opts.appendChild(b);
+  });
+}
+
+function pickTourist(btn,isRight,q){
+  var all=btn.parentNode.querySelectorAll('.opt');
+  all.forEach(function(o){o.classList.add('disabled');});
+  if(isRight){
+    btn.classList.add('correct'); state.score++;
+    showResult(true,'✅ 正解！',q.natural,q.words,null,q);
+  }else{
+    btn.classList.add('wrong'); state.wrong++;
+    var correctJp=q.jp;
+    showResult(false,'❌ 惜しい！正确答案是：',q.natural,q.words,null,q);
+    var rightBtn=Array.prototype.find.call(all,function(o){return o.innerHTML.indexOf(esc(correctJp))>=0;});
+    if(rightBtn)rightBtn.classList.add('correct');
+  }
+}
+
+function showResult(ok,title,natural,words,guideAnswer,touristQ){
+  var total=SCENES[state.scene].qa.length;
+  var card=document.createElement('div');
+  card.className='card';
+  var html='<div class="feedback '+(ok?'ok':'no')+'">'+title+'</div><div class="expl">';
+  if(state.mode==='guide'){
+    html+='<h4>✅ 正确答案</h4><div class="natural">'+esc(guideAnswer)+'</div>'+
+          '<h4>💬 地道表达解析</h4><div>'+esc(natural)+'</div>'+
+          '<h4>🔑 关键单词</h4><div>'+words.map(function(w){return '<span class="word"><b>'+esc(w[0])+'</b> '+esc(w[1])+'</span>';}).join('')+'</div>';
+  }else{
+    html+='<h4>✅ 正确日语</h4><div class="natural">'+esc(touristQ.jp)+'<br><span style="font-size:13px;color:#6b7280;font-style:italic">'+esc(touristQ.romaji)+'</span></div>'+
+          speakBtn(touristQ.jp)+
+          '<h4>💬 地道表达解析</h4><div>'+esc(natural)+'</div>'+
+          '<h4>🔑 关键单词</h4><div>'+words.map(function(w){return '<span class="word"><b>'+esc(w[0])+'</b> '+esc(w[1])+'</span>';}).join('')+'</div>';
+  }
+  html+='</div><div class="row mt">'+
+    (state.idx+1<total
+      ?'<button class="btn btn-primary" onclick="nextQ()">下一题 →</button>'
+      :'<button class="btn btn-primary" onclick="result()">查看结果</button>')+
+  '</div>';
+  card.innerHTML=html;
+  app.appendChild(card);
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+
+function nextQ(){state.idx++;renderScene();}
+
+function result(){
+  var total=SCENES[state.scene].qa.length;
+  var rate=Math.round(state.score/total*100);
+  app.innerHTML=
+  '<div class="hero">'+
+    '<div class="role-badge">🎉 '+SCENES[state.scene].icon+' '+SCENES[state.scene].name+'</div>'+
+    '<h1>练习完成！</h1>'+
+    '<p>答对 '+state.score+' / '+total+' 题<br>正确率 '+rate+'%</p>'+
+  '</div>'+
+  '<div class="card center">'+
+    (rate>=90?'🏆 太稳了！这场景你已经是专家':'📘 不错，再多刷几遍就更顺了')+
+    '<div class="row mt">'+
+      '<button class="btn btn-primary" onclick="enterScene(\''+state.scene+'\')">🔁 再练一次（换题序）</button>'+
+      '<button class="btn btn-ghost" onclick="start(\''+state.mode+'\')">📂 换场景</button>'+
+      '<button class="btn btn-warm" onclick="home()">🏠 回首页</button>'+
+    '</div>'+
+  '</div>';
+}
+
+function updatePg(cur,total){var el=document.getElementById('pg');if(el)el.style.width=(total?(cur/total*100):0)+'%';}
+
+home();
+</script>
+</body>
+</html>
